@@ -9,12 +9,12 @@ from langchain.prompts.chat import SystemMessagePromptTemplate
 from langchain.prompts.chat import HumanMessagePromptTemplate
 
 # Access the API key from the environment
-api_key = os.getenv('OPENAI_API_KEY')
+#api_key = os.getenv('OPENAI_API_KEY')
 
 # Set the API key for the openai library (using the environment variable)
-openai.api_key = api_key
+#openai.api_key = api_key
 
-langchain_key = os.getenv("LANCHAIN_API_KEY_NKP")
+#langchain_key = os.getenv("LANCHAIN_API_KEY_NKP")
 
 
 class AIEmergencyCare:
@@ -22,8 +22,7 @@ class AIEmergencyCare:
         model = ChatOpenAI()
     def get_response(self,usr_input):
         prompt = ChatPromptTemplate(
-            messages= [SystemMessagePromptTemplate(content="Medical Emergency Care"),HumanMessagePromptTemplate(content=usr_input)]
-
+            messages= [SystemMessagePromptTemplate.from_template("4V Medical Emergency Care."),HumanMessagePromptTemplate.from_template(usr_input),]
         )
         response = self.model.generate_response(prompt)
         return response.content
@@ -33,8 +32,8 @@ class AIEmergencyCare:
             usr_input = input("You:")
             if usr_input.lower() in ["exit","quit","bye"]:
                 break
-            response = self.get_response(usr_imput)
-            print(f'4v Medical Emergency Care:{response}')
+            response = self.get_response(usr_input)
+            print(f'4V Medical Emergency Care:{response}')
 
 if __name__  ==  "__main__":
     aichatbot = AIEmergencyCare()

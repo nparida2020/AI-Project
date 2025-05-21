@@ -1,4 +1,4 @@
-# Build an LLM RAG Chatbot With LangChain
+# Build an Hospital Chatbot With LangChain
 
 This repo contains the source code for an LLM RAG Chatbot built with LangChain, originally created for the Real Python article [Build an LLM RAG Chatbot With LangChain](https://realpython.com/build-llm-rag-chatbot-with-langchain/#demo-a-llm-rag-chatbot-with-langchain-and-neo4j). The goal of this project is to iteratively develop a chatbot that leverages the latest techniques, libraries, and models in RAG and Generative AI. Ideally, this repo gives developers a template to build chatbots for their own data and use-cases.
 
@@ -27,13 +27,15 @@ NEO4J_PASSWORD=<YOUR_NEO4J_PASSWORD>
 
 OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>
 
-HOSPITALS_CSV_PATH=https://raw.githubusercontent.com/hfhoffman1144/langchain_neo4j_rag_app/main/data/hospitals.csv
-PAYERS_CSV_PATH=https://raw.githubusercontent.com/hfhoffman1144/langchain_neo4j_rag_app/main/data/payers.csv
-PHYSICIANS_CSV_PATH=https://raw.githubusercontent.com/hfhoffman1144/langchain_neo4j_rag_app/main/data/physicians.csv
-PATIENTS_CSV_PATH=https://raw.githubusercontent.com/hfhoffman1144/langchain_neo4j_rag_app/main/data/patients.csv
-VISITS_CSV_PATH=https://raw.githubusercontent.com/hfhoffman1144/langchain_neo4j_rag_app/main/data/visits.csv
-REVIEWS_CSV_PATH=https://raw.githubusercontent.com/hfhoffman1144/langchain_neo4j_rag_app/main/data/reviews.csv
-EXAMPLE_CYPHER_CSV_PATH=https://raw.githubusercontent.com/hfhoffman1144/langchain_neo4j_rag_app/main/data/example_cypher.csv
+
+HOSPITALS_CSV_PATH=https://raw.githubusercontent.com/nparida2020/AI-Project/refs/heads/main/data/hospitals.csv
+PAYERS_CSV_PATH=https://raw.githubusercontent.com/nparida2020/AI-Project/refs/heads/main/data/payers.csv
+PHYSICIANS_CSV_PATH=https://raw.githubusercontent.com/nparida2020/AI-Project/refs/heads/main/data/physicians.csv
+PATIENTS_CSV_PATH=https://raw.githubusercontent.com/nparida2020/AI-Project/refs/heads/main/data/patients.csv
+VISITS_CSV_PATH=https://raw.githubusercontent.com/nparida2020/AI-Project/refs/heads/main/data/visits.csv
+REVIEWS_CSV_PATH=https://raw.githubusercontent.com/nparida2020/AI-Project/refs/heads/main/data/reviews.csv
+EXAMPLE_CYPHER_CSV_PATH=https://raw.githubusercontent.com/nparida2020/AI-Project/refs/heads/main/data/example_cypher.csv
+
 
 CHATBOT_URL=http://host.docker.internal:8000/hospital-rag-agent
 
@@ -83,3 +85,25 @@ The plan for this project is to iteratively improve the Hospital System Chatbot 
 - **Terraform to provision cloud resources**
 - **Chatbot performance evaluation and experiment tracking**
 - **API authentication**
+
+
+
+    CODE: The following directories and their description
+
+    langchain_intro/ will help you get familiar with LangChain and equip you with the tools that you need to build the chatbot you saw in the demo, and it won’t be included in your final chatbot. You’ll cover this in Step 1.
+
+    data/ has the raw hospital system data stored as CSV files. You’ll explore this data in Step 2. In Step 3, you’ll move this data into a Neo4j database that your chatbot will query to answer questions.
+
+    hospital_neo4j_etl/ contains a script that loads the raw data from data/ into your Neo4j database. You have to run this before building your chatbot, and you’ll learn everything you need to know about setting up a Neo4j instance in Step 3.
+
+    chatbot_api/ is your FastAPI app that serves your chatbot as a REST endpoint, and it’s the core deliverable of this project. The chatbot_api/src/agents/ and chatbot_api/src/chains/ subdirectories contain the LangChain objects that comprise your chatbot. You’ll learn what agents and chains are later, but for now, just know that your chatbot is actually a LangChain agent composed of chains and functions.
+
+    tests/ includes two scripts that test how fast your chatbot can answer a series of questions. This will give you a feel for how much time you save by making asynchronous requests to LLM providers like OpenAI.
+
+    chatbot_frontend/ is your Streamlit app that interacts with the chatbot endpoint in chatbot_api/. This is the UI that you saw in the demo, and you’ll build this in Step 5.
+
+All the environment variables needed to build and run your chatbot will be stored in a .env file. You’ll deploy the code in hospital_neo4j_etl/, chatbot_api, and chatbot_frontend as Docker containers that’ll be orchestrated with Docker Compose. If you want to experiment with the chatbot before going through the rest of this tutorial, then you can download the materials and follow the instructions in the README file to get things running.
+
+
+Data Architecture:
+
